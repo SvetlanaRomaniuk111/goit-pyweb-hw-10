@@ -1,0 +1,31 @@
+import json
+
+# Завантажуємо дані з файлів з зазначенням кодування
+with open('authors.json', 'r', encoding='utf-8') as authors_file:
+    authors_data = json.load(authors_file)
+
+with open('quotes.py', 'r', encoding='utf-8') as quotes_file:
+    quotes_data = json.load(quotes_file)
+
+# Отримуємо списки імен авторів
+authors = {author['fullname'] for author in authors_data}
+quote_authors = {quote['author'] for quote in quotes_data}
+
+# Знаходимо спільні імена авторів
+common_authors = authors.intersection(quote_authors)
+
+# Знаходимо авторів, які є в одному файлі, але відсутні в іншому
+missing_in_authors = quote_authors - authors
+missing_in_quotes = authors - quote_authors
+
+print("Спільні автори:")
+for author in common_authors:
+    print(author)
+
+print("\nАвтори, яких немає у файлі authors.json:")
+for author in missing_in_authors:
+    print(author)
+
+print("\nАвтори, яких немає у файлі quotes.py:")
+for author in missing_in_quotes:
+    print(author)
