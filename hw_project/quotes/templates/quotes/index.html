@@ -30,6 +30,10 @@
                 </li>
                 {% endif %}
 
+                <span class="current">
+                    Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}
+                </span>
+
                 {% if quotes.has_next %}
                 <li class="next">
                     <a href="{% url 'quotes:main_paginate' quotes.next_page_number %}">
